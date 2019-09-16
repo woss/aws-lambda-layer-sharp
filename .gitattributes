@@ -1,0 +1,1 @@
+layers/sharp/out/sharp-0.23.0-aws-lambda-linux-x64-node-10.16.3.zip filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,30 @@
+{
+  "name": "aws-lambda-layer-sharp",
+  "version": "1.0.0",
+  "main": "src/handler.js",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.19.2",
+    "serverless": "^1.52.0",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "^6.0.0-alpha.40",
+    "serverless-webpack": "^5.3.1",
+    "source-map-support": "^0.5.11",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^3.3.7",
+    "webpack-node-externals": "^1.6.0",
+    "sharp": "^0.23.0"
+  },
+  "scripts": {
+    "start": "nodemon -w ./src/**/* --exec \"yarn offline\" ",
+    "offline": "sls offline start"
+  },
+  "keywords": [],
+  "author": "",
+  "description": "",
+  "dependencies": {
+    "axios-debug-log": "^0.6.2",
+    "axios": "^0.19.0",
+    "mime-types": "^2.1.24"
+  }
+}

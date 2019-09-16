@@ -1,0 +1,13 @@
+{
+  "name": "sharp-layer",
+  "version": "1.0.0",
+  "dependencies": {
+    "sharp": "^0.23.0"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Daniel Maricic",
+    "email": "daniel@woss.io"
+  },
+  "description": ""
+}

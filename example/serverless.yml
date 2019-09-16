@@ -1,0 +1,44 @@
+service: aws-lambda-layer-sharp
+frameworkVersion: '>=1.34.0 <2.0.0'
+publish: false
+provider:
+  name: aws
+  runtime: nodejs10.x
+  profile: testSls
+  region: eu-west-1
+  apiGateway:
+    minimumCompressionSize: 1024
+    binaryMediaTypes:
+      - '*/*'
+functions:
+  test:
+    handler: ./example/src/handler.handler
+    events:
+      - http:
+          path: sharp
+          method: get
+    layers:
+      - { Ref: SharpLambdaLayer }
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+    # includeModules: true # Node modules configuration for packaging
+    includeModules:
+      forceExclude:
+        - sharp
+    packager: 'yarn' # Packager that will be used to package your external modules
+    excludeFiles: src/**/*.test.js # Provide a glob for files to ignore
+
+  serverless-offline:
+    port: 4000
+    host: 0.0.0.0
+    dontPrintOutput: true
+    useSeparateProcesses: true
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+  - serverless-offline
+
+package:
+  individually: true

@@ -1,0 +1,18 @@
+service: aws-lambda-layer-sharp
+frameworkVersion: '>=1.34.0 <2.0.0'
+publish: false
+provider:
+  name: aws
+  runtime: nodejs10.x
+  profile: testSls
+  region: eu-west-1
+
+layers:
+  sharp:
+    description: Sharp nodejs imaging library as a layer
+    package:
+      artifact: ./layers/sharp/out/sharp-0.23.0-aws-lambda-linux-x64-node-10.16.3.zip
+    compatibleRuntimes:
+      - nodejs10.x
+    allowedAccounts:
+      - '*'

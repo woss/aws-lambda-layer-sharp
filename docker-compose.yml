@@ -1,0 +1,18 @@
+version: '3'
+services:
+  sharp:
+    image: woss/aws-sharp-layer
+    build:
+      context: ./layers/sharp
+      dockerfile: Dockerfile
+    volumes:
+      - ./layers/sharp:/app
+  deploy:
+    image: woss/aws-sharp-layer-test
+    build:
+      context: ./example
+      dockerfile: Dockerfile
+    volumes:
+      - ./example:/app
+    env_file:
+      - ./.env
