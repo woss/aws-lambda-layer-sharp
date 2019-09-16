@@ -4,3 +4,4 @@ node_modules
 .serverless
 .DS_Store
 .env
+example/dist

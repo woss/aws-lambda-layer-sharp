@@ -12,13 +12,13 @@ provider:
       - '*/*'
 functions:
   test:
-    handler: ./example/src/handler.handler
+    handler: src/handler.handler
     events:
       - http:
           path: sharp
           method: get
     layers:
-      - { Ref: SharpLambdaLayer }
+      - arn:aws:lambda:eu-west-1:502686283826:layer:sharp:7
 custom:
   webpack:
     webpackConfig: 'webpack.config.js' # Name of webpack configuration file

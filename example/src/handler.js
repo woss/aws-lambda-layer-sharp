@@ -1,18 +1,11 @@
-require('axios-debug-log')
-const axios = require('axios')
 const sharp = require('sharp')
-const mime = require('mime-types')
-
-const imagePath =
-  'https://s3-eu-west-1.amazonaws.com/sensio.photo/public-assets/20160903-_MG_5320.jpg'
+const path = require('path')
 
 exports.handler = async event => {
   try {
-    const { data: imageData } = await axios.get(imagePath, {
-      responseType: 'arraybuffer'
-    })
-
-    const img = await sharp(imageData)
+    const imagePath = path.resolve('./src/lucky.jpg')
+    console.log(imagePath)
+    const img = await sharp(imagePath)
       .withMetadata()
       .resize(800)
       .convolve({
@@ -23,11 +16,10 @@ exports.handler = async event => {
       .webp()
       .toBuffer()
 
-    const ContentType = mime.contentType('webp')
     const response = {
       statusCode: 200,
       headers: {
-        'Content-Type': ContentType
+        'Content-Type': 'image/webp'
       },
       body: img.toString('base64'),
       isBase64Encoded: true
