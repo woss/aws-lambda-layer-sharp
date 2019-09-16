@@ -1,11 +1,22 @@
 # AWS Layer for Lambda functions
 
-Sharp js as a layer,
+[Sharp](https://sharp.pixelplumbing.com/en/stable/) js as a layer,
 
 ## Image copyright
 
 `lucky.jpg` is owned by me
 
-## Example
+## Running the example
 
-http://0.0.0.0:4000/sharp?width=800&metadata=true&convolve=true
+```bash
+cd example
+
+yarn
+yarn start
+```
+
+Then visit the following link
+
+[http://localhost:4000/sharp?width=800&metadata=true&convolve=true](http://0.0.0.0:4000/sharp?width=800&metadata=true&convolve=true)
+
+to deploy run `yarn deploy` from the `example` folder

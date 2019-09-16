@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "nodemon -w ./src/**/* --exec \"yarn offline\" ",
-    "offline": "sls offline start"
+    "offline": "sls offline start",
+    "deploy": " sls deploy"
   },
   "keywords": [],
   "author": "",
