@@ -1,5 +1,6 @@
 {
-  "name": "aws-lambda-layer-sharp",
+  "name": "aws-lambda-layer-sharp-example",
+  "repository": "git@github.com:woss/aws-lambda-layer-sharp.git",
   "version": "1.0.0",
   "main": "src/handler.js",
   "license": "MIT",
@@ -18,10 +19,10 @@
   "scripts": {
     "start": "nodemon -w ./src/**/* --exec \"yarn offline\" ",
     "offline": "sls offline start",
-    "deploy": " sls deploy"
+    "deploy": "sls deploy"
   },
   "keywords": [],
-  "author": "",
+  "author": "Daniel Maricic <daniel@woss.io>",
   "description": "",
   "dependencies": {}
 }

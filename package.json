@@ -1,0 +1,13 @@
+{
+  "name": "aws-lambda-layer-sharp",
+  "version": "1.0.0",
+  "repository": "git@github.com:woss/aws-lambda-layer-sharp.git",
+  "author": "Daniel Maricic <daniel@woss.io>",
+  "license": "Apache",
+  "dependencies": {
+    "serverless": "^1.52.0"
+  },
+  "scripts": {
+    "deploy": "sls deploy"
+  }
+}
