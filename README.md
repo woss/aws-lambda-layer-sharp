@@ -1,11 +1,13 @@
-# AWS Layer for [Sharp](https://sharp.pixelplumbing.com/en/stable/) 🚀🚀🚀
+# AWS Layer for [Sharp](https://github.com/lovell/sharp) 🚀🚀🚀
 
-This is a [AWS Lambda Layers](https://docs.aws.amazon.com/en_pv/lambda/latest/dg/configuration-layers.html) custom routine that gives you access to [Sharp image library](https://sharp.pixelplumbing.com/en/stable/) in your lambda functions for NodeJs env without you installing and building the module yourself.
+[AWS Lambda Layers](https://docs.aws.amazon.com/en_pv/lambda/latest/dg/configuration-layers.html) custom routine that gives you access to [Sharp image library](https://github.com/lovell/sharp) without installing, building and shipping the module with your functions. Just include it and use it.
+
+Module is built on amazonlinux docker image and it's 100% compatible with nodejs10.x lambda environment.
 
 This layer gives you:
 
-- 🚀 fast iteration when dealing with images
-- 📦 ~>30MB smaller functions, jsut because you don't ship them with sharp
+- 🚀 fast iteration when dealing with functions that resize images
+- 📦 ~30MB smaller functions, just because you don't ship them with sharp
 
 ## How to Use this layer
 
