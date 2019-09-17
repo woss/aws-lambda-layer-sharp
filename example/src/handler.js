@@ -17,10 +17,10 @@ exports.handler = async event => {
     // Extract the qs from the event
     let queryStringParameters = event.queryStringParameters || {}
     console.log(`Got query params `, queryStringParameters)
-    let { width, height, metadata, convolve } = queryStringParameters
+    const { fm } = queryStringParameters
 
     const operations = qsToSharp.transform(queryStringParameters)
-    console.log(operations)
+    // console.log(operations, queryStringParameters)
 
     // Let's create the sharp instance
     const img = sharp(readTheLuckyFile())
@@ -31,10 +31,10 @@ exports.handler = async event => {
         console.log(func, options)
 
         if (options) {
-          // console.log(`calling  image[${func}](${options})`)
+          console.log(`calling  image[${func}](${options})`)
           img[func](options)
         } else {
-          // console.log(`calling  image[${func}]()`)
+          console.log(`calling  image[${func}]()`)
           img[func]()
         }
       }
@@ -70,7 +70,7 @@ exports.handler = async event => {
     const response = {
       statusCode: 200,
       headers: {
-        'Content-Type': 'image/webp'
+        'Content-Type': `image/${fm || 'webp'}`
       },
       body: image.toString('base64'),
       isBase64Encoded: true
