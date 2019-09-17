@@ -1,43 +1,68 @@
 const sharp = require('sharp')
 const path = require('path')
 const fs = require('fs')
+const qsToSharp = require('@sensio/qs-to-sharp')
+/**
+ * Read the LUCKY image file
+ */
+function readTheLuckyFile() {
+  // Read the file to a buffer
+  const imagePath = path.resolve('./src/lucky.jpg')
+  const imgBuf = fs.readFileSync(imagePath)
+  return imgBuf
+}
 
 exports.handler = async event => {
   try {
-    // Read the file to a buffer
-    const imagePath = path.resolve('./src/lucky.jpg')
-    const imgBuf = fs.readFileSync(imagePath)
-
     // Extract the qs from the event
-    const { queryStringParameters } = event
+    let queryStringParameters = event.queryStringParameters || {}
     console.log(`Got query params `, queryStringParameters)
-    const { width, height, metadata, convolve } = queryStringParameters
+    let { width, height, metadata, convolve } = queryStringParameters
+
+    const operations = qsToSharp.transform(queryStringParameters)
+    console.log(operations)
 
     // Let's create the sharp instance
-    const img = sharp(imgBuf)
+    const img = sharp(readTheLuckyFile())
 
-    if (metadata === 'true') {
-      img.withMetadata()
+    for (const func in operations) {
+      if (operations.hasOwnProperty(func)) {
+        const options = operations[func]
+        console.log(func, options)
+
+        if (options) {
+          // console.log(`calling  image[${func}](${options})`)
+          img[func](options)
+        } else {
+          // console.log(`calling  image[${func}]()`)
+          img[func]()
+        }
+      }
     }
 
-    img.resize({
-      width: parseInt(width, 10) || 800,
-      height: parseInt(height, 10),
-      fit: sharp.fit.cover,
-      position: sharp.strategy.entropy
-    })
+    // if (metadata === '1') {
+    //   img.withMetadata()
+    // }
 
-    // for fun of it 😎
-    if (convolve === 'true') {
-      img.convolve({
-        width: 3,
-        height: 3,
-        kernel: [-1, 0, 1, -2, 0, 2, -1, 0, 1]
-      })
-    }
+    // img.resize({
+    //   width: parseInt(width, 10) || 800,
+    //   height: parseInt(height, 10),
+    //   fit: sharp.fit.cover,
+    //   withoutEnlarge: true,
+    //   position: sharp.strategy.entropy
+    // })
 
-    // transform to the webp format
-    img.webp()
+    // // for fun of it 😎
+    // if (convolve) {
+    //   img.convolve({
+    //     width: 3,
+    //     height: 3,
+    //     kernel: [-1, 0, 1, -2, 0, 2, -1, 0, 1]
+    //   })
+    // }
+
+    // // transform to the webp format
+    // img.webp()
 
     // last thing is to get the buffer of cloned instance
     const image = await img.clone().toBuffer()
